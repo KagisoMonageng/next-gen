@@ -11,6 +11,7 @@ import { CommentsService } from 'src/app/services/comments.service';
 })
 export class CommentsSectionComponent implements OnInit {
   commentForm: FormGroup;
+  comments: any[] = [];
 
   constructor(private fb: FormBuilder, private http: CommentsService) {
     this.commentForm = this.fb.group({
@@ -21,10 +22,15 @@ export class CommentsSectionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  
+
+  ngOnInit(): void {
+    this.getComments();
+  }
+
 
   onSubmit(commentForm : FormGroup) {
-    console.log(commentForm.value)
+   
     if (commentForm.valid) {
       this.http.addComment(commentForm.value)
         .subscribe((res:any)=>{
@@ -39,5 +45,20 @@ export class CommentsSectionComponent implements OnInit {
           
         );
     }
+  }
+
+  getComments() {
+   
+    this.http.viewComments() 
+      .subscribe((comments: any[]) => {
+        this.comments = comments; 
+      }, (err: HttpErrorResponse) => {
+        console.error('Failed to retrieve comments', err);
+      });
+  }
+
+  onShow() {
+  
+    this.getComments();
   }
 }

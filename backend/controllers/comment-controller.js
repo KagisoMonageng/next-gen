@@ -1,11 +1,13 @@
 const db = require('../config/db-config');
+
+
 exports.viewComments = async (req, res) => { 
     const sql = "SELECT * FROM comments";
     
     db.query(sql, (err, results) => {
         if (err) {
             console.log(err);
-            res.status(400).json({ message: "Failed to retrieve comments" });
+            res.status(400).json({ message: "Failed to retrieve comments 4" });
         } else {
             res.status(200).json(results.rows); // Assuming you're using a PostgreSQL client like pg
         }

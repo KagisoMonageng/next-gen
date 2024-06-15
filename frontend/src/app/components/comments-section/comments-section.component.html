@@ -18,3 +18,15 @@
     <input type="text" id="blog_id" name="blog_id" placeholder="Blog ID:" formControlName="blog_id" type="text">
     <input type="submit" value="Submit" class="comment-button">
 </form>
+
+
+<div *ngIf="comments.length > 0">
+    <h2>Comments</h2>
+    <ul>
+      <li *ngFor="let comment of comments">
+        {{ comment.comment_text }} - {{ comment.author_id }}
+      </li>
+    </ul>
+  </div>
+  
+  <button (click)="onShow()">Show Comments</button>
