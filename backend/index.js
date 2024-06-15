@@ -60,9 +60,10 @@ httpServer.listen(8080, () => {
 // Endpoint routes
 const auth_route = require("./end-points/auth");
 const blog_route = require("./end-points/blog");
+const comment_route = require("./end-points/comments");
 
 app.use("/auth", auth_route);
-app.use("/blog",blog_route)
-
+app.use("/blog",blog_route);
+app.use("/comments",comment_route)
 
 
