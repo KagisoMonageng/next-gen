@@ -13,15 +13,15 @@ exports.viewComments = async (req, res) => {
 }
 
 exports.addComment = async (req, res) => {
-    const { id, comment_text, author_id,  blog_id } = req.body;
+    const { comment_text, author_id,  blog_id } = req.body;
 
    
 
-    const sql = "INSERT INTO comments ( id, comment_text, author_id,  blog_id) VALUES ($1,$2,$3,$4)";
+    const sql = "INSERT INTO comments ( comment_text, author_id,  blog_id) VALUES ($1,$2,$3)";
     
   
     
-    db.query(sql, [ id, comment_text, author_id,  blog_id], (err, results) => {
+    db.query(sql, [  comment_text, author_id,  blog_id], (err, results) => {
         if(err) {
             console.log(err)
             res.status(400).json({message:"Failed to add comment"}); 

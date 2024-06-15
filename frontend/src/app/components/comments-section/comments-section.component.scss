@@ -1,0 +1,27 @@
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.comment-area{
+    border: 1px solid #000;
+    height: 100px;
+    width: 40%;
+}
+.comment-button{
+    padding: 6px;
+    background-color: gray;
+    border: 1px solid #000;
+    margin-top: 15px;
+    width: 10%;
+    color: #fff;
+    border-radius: 30px;
+}
+.comment-button:hover{
+   
+    background-color: rgb(101, 6, 159);
+   
+
+   
+}
