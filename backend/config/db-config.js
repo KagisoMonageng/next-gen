@@ -1,5 +1,6 @@
 const pg = require('pg')
-var client = new pg.Client('string here'); //Connection string here
+require("dotenv").config();
+var client = new pg.Client(process.env.CONN); //Connection string here
 client.connect(function(err){
   if (err) {
     console.log("Database connection error");

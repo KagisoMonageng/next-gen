@@ -1,5 +1,5 @@
 // Imports here
-
+const db = require('../config/db-config');
 
 exports.viewBlogs = async (req, res) => { 
     res.status(200).json({ message: "Response here" });
