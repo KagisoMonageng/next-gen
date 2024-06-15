@@ -64,6 +64,6 @@ const comment_route = require("./end-points/comments");
 
 app.use("/auth", auth_route);
 app.use("/blog",blog_route);
-app.use("/comments",comment_route)
+app.use("/comments",comment_route);
 
 
