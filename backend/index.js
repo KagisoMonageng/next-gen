@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
 })
 
 // Start the server and listen on the defined port
-httpServer.listen(process.env.PORT || 8080, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+httpServer.listen(8080, () => {
+    console.log(`Server running on port 8080`);
 });
 
 // Endpoint routes
