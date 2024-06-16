@@ -39,8 +39,22 @@ exports.addComment = async (req, res) => {
 }
 
 exports.updateComment = async (req, res) => { 
-    res.status(200).json({ message: "Response here" });
-    // Update function in here
+   
+    
+    const { comment_id, comment_text } = req.body;
+
+    
+    const sql = "UPDATE comments SET comment_text = $1 WHERE comment_id = $2";
+  
+    db.query(sql, [comment_text, comment_id], (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ message: "Failed to update comment" });
+      } else {
+        // Check if rows affected (optional): You can check `results.rowCount` to see if any rows were updated
+        res.status(200).json({ message: "Comment updated successfully" });
+      }
+    })
 }
 
 exports.deleteComment = async (req, res) => { 
