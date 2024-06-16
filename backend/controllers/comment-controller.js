@@ -41,7 +41,7 @@ exports.addComment = async (req, res) => {
 exports.updateComment = async (req, res) => { 
    
     
-    const { comment_id, comment_text } = req.body;
+    const {  comment_text,comment_id } = req.body;
 
     
     const sql = "UPDATE comments SET comment_text = $1 WHERE comment_id = $2";

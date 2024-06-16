@@ -7,7 +7,7 @@
 <button class="comment-button">commnent</button>
 </form> -->
 
-<div class="body-comment">
+<!-- <div class="body-comment">
 
     <form  [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm)">
   
@@ -31,4 +31,27 @@
       </div>
       
       <button (click)="onShow()">Show Comments</button>
-</div>
+</div> -->
+<div>
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <textarea id="comment_text" placeholder="Comment:" class="comment-area" formControlName="comment_text"></textarea>
+      <input type="text" id="author_id" placeholder="Author ID:" formControlName="author_id">
+      <input type="text" id="blog_id" placeholder="Blog ID:" formControlName="blog_id">
+      <input type="submit" value="Submit" class="comment-button">
+    </form>
+    <button type="button" (click)="onShow()">Show Comments</button>
+  </div>
+  
+  <div *ngIf="comments.length > 0">
+    <h2>Comments</h2>
+    <ul>
+      <li *ngFor="let comment of comments">
+        <p>{{ comment.comment_text }}</p>
+        <p><strong>Author ID:</strong> {{ comment.author_id }}</p>
+        <p><strong>Blog ID:</strong> {{ comment.blog_id }}</p>
+        <button (click)="onEdit(comment)">Edit</button>
+      </li>
+    </ul>
+  </div>
+  
+  

@@ -16,9 +16,11 @@ baseURL = 'http://localhost:8080/'
      return this.http.post(this.baseURL+'comments/add-comment', data)  
     }
  
-    updateComment(data: any,id: number){
-     return this.http.patch(this.baseURL+'comments/edit-comment/' + id, data)  
+    updateComment(comment: any,id: number){
+     return this.http.patch(this.baseURL+'comments/edit-comment/' + id, comment)
+    //  return this.http.put(`${this.baseUrl}/updateComment`, JSON.stringify({ comment_id: id, ...comment }), { headers });  
     }
+ 
  
     deleteComment(id: number){
      return this.http.delete(this.baseURL+'comments/delete-comment/' + id)  

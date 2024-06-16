@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Edit Comment</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <textarea matInput placeholder="Comment" formControlName="comment_text"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSave()">Save</button>
+</mat-dialog-actions>
