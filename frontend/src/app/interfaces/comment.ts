@@ -1,5 +1,5 @@
 // Blog interface
-interface Comment {
+export interface Comment {
     id:number;
     comment_text:string
     comment_date:Date;

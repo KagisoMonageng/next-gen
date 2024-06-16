@@ -1,0 +1,35 @@
+.addFrom{
+    max-width: 100%;
+    & .form-group{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+p-multiselect {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 10px;
+    padding: 11px;
+}
+p-multiselect:not(.p-disabled):hover {
+    border-color: #3B82F6;
+}
+
+.p-multiselect-chip{
+    width: 100% !important;
+}
+
+
+
+
+
+
