@@ -5,6 +5,20 @@ exports.viewBlogs = async (req, res) => {
     res.status(200).json({ message: "Response here" });
 }
 
+exports.viewPopular = async (req, res) => { 
+    const sql = "SELECT b.title, b.content, b.author_id, b.feature_image, b.blog_date, b.category, b.tags, b.likes, b.published, u.name, u.surname, u.profile_image FROM blog b INNER JOIN users u ON b.author_id = u.id ORDER BY b.likes DESC LIMIT 3";
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.log(err)
+            res.status(400).json({ message: "Failed to load data" });
+        }else{
+            res.status(200).json(results.rows);
+        }
+    })
+
+}
+
 exports.addBlog = async (req, res) => {
     const { title, content, author_id, feature_image, category, tags, published } = req.body;
 
@@ -17,7 +31,7 @@ exports.addBlog = async (req, res) => {
             console.log(err)
             res.status(400).json({message:"Failed to add blog entry"}); 
         }else{
-            res.status(201).json({message:"Blog entry added successfully"}); 
+            res.status(201).json({message:"Blog entry added successfully"});
         }
 
     })
