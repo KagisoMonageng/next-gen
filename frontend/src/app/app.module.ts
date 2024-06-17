@@ -15,6 +15,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import * as Quill from 'quill';
+import { CommonModule } from '@angular/common';
+import { ViewBlogComponent } from './components/view-blog/view-blog.component';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -22,10 +24,12 @@ import * as Quill from 'quill';
     AppComponent,
     TrendingBlogsComponent,
     BlogItemComponent,
-    AddBlogComponent
+    AddBlogComponent,
+    ViewBlogComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

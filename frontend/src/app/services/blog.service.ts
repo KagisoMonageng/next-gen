@@ -21,6 +21,10 @@ export class BlogService {
     return this.http.get<Blog[]>(this.baseURL+'blog/view-popular')   
    }
 
+   viewBlog(id:number): Observable<Blog>{ 
+    return this.http.get<Blog>(this.baseURL+'blog/view-content/'+id)     
+   }
+
   addBlog(data: any){
     return this.http.post(this.baseURL+'blog/add-blog', data)  
    }

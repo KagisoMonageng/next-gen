@@ -1,0 +1,45 @@
+.trend-cards {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    place-items: center;
+    padding: 20px;
+    justify-content: end;
+
+    & .trend-body {
+        @apply bg-white bg-opacity-40 backdrop-blur-xl rounded-xl w-full p-4;
+
+        & .card-title {
+            width: 100%;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+        }
+
+        ;
+
+    }
+}
+
+
+.overwrite-styles {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &>p,
+    strong,b,
+    span {
+        color: black !important;
+        font-weight: 400 !important;
+        font-size: 22px !important;
+    }
+}
