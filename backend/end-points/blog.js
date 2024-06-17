@@ -6,6 +6,7 @@ const router = express.Router();
 //BLOG ENDPOINT PATHS
 router.get('/view-all', blog_controller.viewBlogs)
 router.get('/view-popular', blog_controller.viewPopular)
+router.get('/view-content/:id', blog_controller.viewBlog)
 router.post('/add-blog', blog_controller.addBlog)
 router.patch('/edit-blog:blog_id', blog_controller.updateBlog)
 router.patch('/delete-blog:blog_id', blog_controller.deleteBlog)

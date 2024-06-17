@@ -21,29 +21,29 @@ app.use(function (req, res, next) {
 const httpServer = http.createServer(app);
 
 // Initialize Socket.IO on the HTTP server
-const io = socketIo(httpServer, {
-    cors: {
-        origin: '*',
-        methods: ['GET', 'POST'],
-    },
-});
+// const io = socketIo(httpServer, {
+//     cors: {
+//         origin: '*',
+//         methods: ['GET', 'POST'],
+//     },
+// });
 
-// Listen for client connections
-io.on('connection', (socket) => {
-    console.log('A user connected');
+// // Listen for client connections
+// io.on('connection', (socket) => {
+//     console.log('A user connected');
 
-    // Handle custom events from the client
-    socket.on('message', (data) => {
-        console.log('Message received:', data);
-        // Broadcast the message to all connected clients
-        io.emit('message', data);
-    });
+//     // Handle custom events from the client
+//     socket.on('message', (data) => {
+//         console.log('Message received:', data);
+//         // Broadcast the message to all connected clients
+//         io.emit('message', data);
+//     });
 
-    // Handle disconnection
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
-    });
-});
+//     // Handle disconnection
+//     socket.on('disconnect', () => {
+//         console.log('A user disconnected');
+//     });
+// });
 
 
 //   Default route displays that
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 })
 
 // Start the server and listen on the defined port
-httpServer.listen(8080, () => {
+httpServer.listen(process.env.PORT, () => {
     console.log(`Server running on port 8080`);
 });
 

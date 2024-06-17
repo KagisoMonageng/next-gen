@@ -2,7 +2,7 @@
 export interface Blog {
     id:number;
     title:string;
-    content:string
+    content:any;
     blog_date:Date;
     feature_image:string;
     published:boolean;
