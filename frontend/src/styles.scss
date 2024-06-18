@@ -24,6 +24,23 @@ body{
     height: 100vh;
     font-family: 'poppins';
 }
+
+h2{
+  font-size: 18px;
+  position: relative;
+  padding-left: 18px;
+  display: flex;
+  place-items: center;
+  &::after{
+    content: '';
+    width: 6px;
+    height: 80%;
+    position: absolute;
+    left: 0;
+    @apply bg-secondary rounded-full
+  }
+
+}
 .p-multiselect-label-container {
   overflow: hidden;
   flex: 1 1 auto;

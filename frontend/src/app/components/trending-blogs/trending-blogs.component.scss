@@ -8,7 +8,7 @@
     justify-content: end;
 
     & .trend-body {
-        @apply bg-white bg-opacity-40 backdrop-blur-xl rounded-xl w-full p-4;
+        @apply bg-black text-white bg-opacity-40 backdrop-blur-xl rounded-xl w-full p-4;
 
         & .card-title {
             width: 100%;
