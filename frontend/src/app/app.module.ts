@@ -17,6 +17,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import * as Quill from 'quill';
 import { CommonModule } from '@angular/common';
 import { ViewBlogComponent } from './components/view-blog/view-blog.component';
+import { BackLinkComponent } from './components/back-link/back-link.component';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ViewBlogComponent } from './components/view-blog/view-blog.component';
     TrendingBlogsComponent,
     BlogItemComponent,
     AddBlogComponent,
-    ViewBlogComponent
+    ViewBlogComponent,
+    BackLinkComponent
   ],
   imports: [
     BrowserModule,

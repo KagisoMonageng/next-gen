@@ -1,12 +1,11 @@
 const pg = require('pg')
 require("dotenv").config();
-var client = new pg.Client(); //Connection string here
+var client = new pg.Client(process.env.POSTGRES_URL); // Connection string here
 client.connect(function(err){
   if (err) {
     console.log("Database connection error");
     console.log(err)
-  }else
-  {
+  }else{
     console.log("Database connected successfully");
   }
   

@@ -14,6 +14,7 @@ export class ViewBlogComponent implements OnInit {
   isLoading = true;
   featureId !: number;
   blog !: Blog;
+  tags !: string[]
 
   constructor(private route: ActivatedRoute, private blogService: BlogService, private toast: HotToastService) {
 
@@ -28,7 +29,8 @@ export class ViewBlogComponent implements OnInit {
   loadContent(id: number) {
     this.blogService.viewBlog(id).subscribe((blog: Blog) => {
       this.blog = blog;
-      console.log(blog)
+      this.tags = blog.tags.split('#');
+      
       // this.blog.feature_image = this.blog.feature_image.replace('image/upload/','image/upload/c_limit,w_700/')
 
       this.isLoading = false;

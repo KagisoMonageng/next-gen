@@ -34,6 +34,7 @@ exports.viewBlog = async (req, res) => {
 
 }
 
+
 exports.addBlog = async (req, res) => {
     const { title, content, author_id, feature_image, category, tags, published } = req.body;
 
