@@ -18,6 +18,11 @@ import * as Quill from 'quill';
 import { CommonModule } from '@angular/common';
 import { ViewBlogComponent } from './components/view-blog/view-blog.component';
 import { BackLinkComponent } from './components/back-link/back-link.component';
+import { HomeDashComponent } from './components/home-dash/home-dash.component';
+import { NewBlogsComponent } from './components/new-blogs/new-blogs.component';
+import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blogs.component';
+import { SearchBlogComponent } from './components/search-blog/search-blog.component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -27,7 +32,11 @@ import { BackLinkComponent } from './components/back-link/back-link.component';
     BlogItemComponent,
     AddBlogComponent,
     ViewBlogComponent,
-    BackLinkComponent
+    BackLinkComponent,
+    HomeDashComponent,
+    NewBlogsComponent,
+    ViewAllBlogsComponent,
+    SearchBlogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +50,7 @@ import { BackLinkComponent } from './components/back-link/back-link.component';
     EditorModule,
     DropdownModule,
     MultiSelectModule,
+    FilterPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,65 @@
+<div class="flex justify-between justify-between my-8">
+  <h2 class="">Latest Blogs</h2>
+  <a routerLink="/view-all" class="btn btn-xs">Show All <img src="../../../assets/right-arrow.svg" class="w-5" alt=""></a>
+</div>
+<div *ngIf="isLoading" class="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-3">
+
+  <div class="flex gap-4">
+    <div class="skeleton h-full w-1/4"></div>
+    <div class="flex flex-col gap-2 w-3/4">
+      <div class="skeleton h-4 w-28"></div>
+      <div class="skeleton h-4 w-full"></div>
+      <div class="skeleton h-4 w-full"></div>
+    </div>
+  </div>
+  <div class="flex gap-4 ">
+    <div class="skeleton h-full w-1/4"></div>
+    <div class="flex flex-col gap-2 w-3/4">
+      <div class="skeleton h-4 w-28"></div>
+      <div class="skeleton h-4 w-full"></div>
+      <div class="skeleton h-4 w-full"></div>
+    </div>
+  </div>
+  <div class="flex gap-4 ">
+    <div class="skeleton h-full w-1/4"></div>
+    <div class="flex flex-col gap-2 w-3/4">
+      <div class="skeleton h-4 w-28"></div>
+      <div class="skeleton h-4 w-full"></div>
+      <div class="skeleton h-4 w-full"></div>
+    </div>
+  </div>
+  <div class="flex gap-4 ">
+    <div class="skeleton h-full w-1/4"></div>
+    <div class="flex flex-col gap-2 w-3/4">
+      <div class="skeleton h-4 w-28"></div>
+      <div class="skeleton h-4 w-full"></div>
+      <div class="skeleton h-4 w-full"></div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+<div *ngIf="!isLoading" class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-4">
+  <a (click)="viewContent(blog)" class="blog-card flex flex-col lg:flex-row gap-3 rounded-xl bg-white shadow-sm p-2"
+    *ngFor="let blog of newBlogs">
+    <img [src]="blog.feature_image" [alt]="blog.title"
+      class="w-full h-52 lg:w-52 lg:h-full object-cover object-center rounded-xl">
+    <div class="blog-content flex flex-col flex-1">
+      <p class="font-semibold latest-title text-lg mb-4 mt-2">{{blog.title}}</p>
+      <p class="latest-content">{{blog.content}}</p>
+
+      <div class="author shadow-sm flex place-items-center gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 my-3">
+        <img src="{{blog.author_image}}" alt="" class="w-10 h-10 object-cover rounded-full">
+        <div class="author-name">
+          <p class="mb-2">{{blog.author_name}} {{blog.author_surname}}</p>
+          <div class="badge">{{blog.blog_date | date: 'dd, MMM YYYY'}}</div>
+        </div>
+      </div>
+    </div>
+
+  </a>
+</div>

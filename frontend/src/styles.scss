@@ -12,26 +12,28 @@
 @import '~quill/dist/quill.snow.css'; // or any other Quill theme you prefer
 
 * {
-    margin: 0;
-    scroll-behavior: smooth;
-    padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  padding: 0;
 
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
-  }
-body{
-    height: 100vh;
-    font-family: 'poppins';
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 }
 
-h2{
+body {
+  height: 100vh;
+  font-family: 'poppins';
+}
+
+h2 {
   font-size: 18px;
   position: relative;
   padding-left: 18px;
   display: flex;
   place-items: center;
-  &::after{
+
+  &::after {
     content: '';
     width: 6px;
     height: 80%;
@@ -41,6 +43,15 @@ h2{
   }
 
 }
+
+.blog-card {
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+&:hover{
+  transform: scale(1.02);
+}
+}
+
 .p-multiselect-label-container {
   overflow: hidden;
   flex: 1 1 auto;
@@ -53,4 +64,46 @@ h2{
   background: #EFF6FF;
   color: #1D4ED8;
   border-radius: 6px;
+}
+
+p.latest-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+p.latest-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+// KEYFRAMES
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

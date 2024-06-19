@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { TrendingBlogsComponent } from './components/trending-blogs/trending-blogs.component';
 import { ViewBlogComponent } from './components/view-blog/view-blog.component';
+import { HomeDashComponent } from './components/home-dash/home-dash.component';
+import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blogs.component';
 
 const routes: Routes = [
   // Paths go in here
@@ -10,7 +12,10 @@ const routes: Routes = [
     path: 'add',component: AddBlogComponent,
   },
   {
-    path:'trending',component: TrendingBlogsComponent,
+    path:'dash',component: HomeDashComponent,
+  },
+  {
+    path:'view-all',component: ViewAllBlogsComponent,
   },
   {
     path:'view-content/:id',component: ViewBlogComponent
