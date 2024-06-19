@@ -20,6 +20,8 @@
     "@angular/router": "^16.0.0",
     "@ngneat/hot-toast": "^5.0.2",
     "@ngneat/overview": "^3.0.0",
+    "gsap": "^3.12.5",
+    "ngx-filter-pipe": "^3.0.0",
     "ngx-skeleton-loader": "^9.0.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",

@@ -12,28 +12,35 @@ export class BlogService {
 
   constructor(private http : HttpClient) { }
 
-  viewAll(): Observable<Blog[]>{ 
-   return this.http.get<Blog[]>(this.baseURL+'blog/view-all')  
+  viewAll(page: number, limit: number): Observable<Blog[]>{
+   return this.http.get<Blog[]>(`${this.baseURL}blog/view-all?page=${page}&limit=${limit}`)
   }
 
- 
-  viewPopular(): Observable<Blog[]>{ 
-    return this.http.get<Blog[]>(this.baseURL+'blog/view-popular')   
+  viewSearch(): Observable<Blog[]>{
+    return this.http.get<Blog[]>(this.baseURL+'blog/view-search')
    }
 
-   viewBlog(id:number): Observable<Blog>{ 
-    return this.http.get<Blog>(this.baseURL+'blog/view-content/'+id)     
+  viewPopular(): Observable<Blog[]>{
+    return this.http.get<Blog[]>(this.baseURL+'blog/view-popular')
+   }
+
+   viewLatest(): Observable<Blog[]>{
+    return this.http.get<Blog[]>(this.baseURL+'blog/view-latest')
+   }
+
+   viewBlog(id:number): Observable<Blog>{
+    return this.http.get<Blog>(this.baseURL+'blog/view-content/'+id)
    }
 
   addBlog(data: any){
-    return this.http.post(this.baseURL+'blog/add-blog', data)  
+    return this.http.post(this.baseURL+'blog/add-blog', data)
    }
-   
+
    updateBlog(data: any,id: number){
-    return this.http.patch(this.baseURL+'blog/edit-blog/' + id, data)  
+    return this.http.patch(this.baseURL+'blog/edit-blog/' + id, data)
    }
 
    deleteBlog(id: number){
-    return this.http.delete(this.baseURL+'blog/delete-blog/' + id)  
+    return this.http.delete(this.baseURL+'blog/delete-blog/' + id)
    }
 }

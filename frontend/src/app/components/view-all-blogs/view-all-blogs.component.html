@@ -1,0 +1,138 @@
+<div class="container mx-auto px-2 lg:px-0 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
+  <div class="flex">
+    <app-back-link></app-back-link>
+  </div>
+
+  <div class="flex my-8">
+    <h2 class="">All Blogs</h2>
+  </div>
+
+  <div class="flex flex-col-reverse lg:flex-row gap-2 lg:gap-6">
+    <div class="w-full lg:w-3/4">
+      <div class="flex justify-between mb-3 place-items-center" *ngIf="!isLoading">
+        <div class="w-80">
+          <app-search-blog></app-search-blog>
+        </div>
+        <div class="dropdown dropdown-bottom dropdown-end">
+          <div tabindex="0" role="button" class="badge h-5 cursor-pointer gap-2 px-3 m-1">Sort <img src="../../../assets/right-arrow.svg" alt="" class="w-5 rotate-90"></div>
+          <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-60">
+            <li><a (click)="sortDateDescend()">Date Posted (Newer - Older)</a></li>
+            <li><a (click)="sortDateAscend()">Date Posted (Older - Newer)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-5">
+        <div class="flex gap-4">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+        <div class="flex gap-4 ">
+          <div class="skeleton h-full w-1/4"></div>
+          <div class="flex flex-col gap-2 w-3/4">
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading" class="grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-4 mb-5">
+        <a (click)="viewContent(blog)" class="blog-card flex flex-col gap-3 rounded-xl shadow-xl p-2"
+          *ngFor="let blog of blogs">
+          <img [src]="blog.feature_image" [alt]="blog.title"
+            class="w-full h-52 object-cover object-center rounded-xl">
+          <div class="blog-content flex flex-col flex-1">
+            <p class="font-semibold latest-title text-lg mb-4 mt-2">{{blog.title}}</p>
+            <p class="latest-content">{{blog.content}}</p>
+
+            <div class="author shadow-sm flex place-items-center gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 my-3">
+              <img src="{{blog.author_image}}" alt="" class="w-10 h-10 object-cover rounded-full">
+              <div class="author-name">
+                <p class="mb-2">{{blog.author_name}} {{blog.author_surname}}</p>
+                <div class="badge">{{blog.blog_date | date: 'dd, MMM YYYY'}}</div>
+              </div>
+            </div>
+          </div>
+
+        </a>
+      </div>
+
+
+
+
+      <div class="flex justify-center" *ngIf="!isLoading">
+        <div class="flex gap-2 place-items-center">
+          <button class="btn btn-ghost btn-xs disabled:opacity-0"(click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1"><img src="../../../assets/right-arrow.svg" alt="" class="w-5 rotate-180"></button>
+          <span class="text-xs">{{ currentPage }} of {{ totalPages }}</span>
+          <button class=" btn btn-ghost btn-xs" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages"><img src="../../../assets/right-arrow.svg" alt="" class="w-5"></button>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="w-full lg:w-1/4">
+      <h2>Tags</h2>
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+</div>

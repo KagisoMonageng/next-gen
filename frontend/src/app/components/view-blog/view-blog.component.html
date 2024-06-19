@@ -1,62 +1,67 @@
-<div *ngIf="isLoading" class="flex flex-col gap-3">
-    <div class="flex flex-col gap-4 w-full">
-        <div class="skeleton h-4 w-full"></div>
-        <div class="skeleton h-4 w-28"></div>
-        <div class="skeleton h-32 w-full"></div>
-        <div class="skeleton h-4 w-28"></div>
-        <div class="skeleton h-4 w-full"></div>
-        <div class="skeleton h-4 w-full"></div>
-    </div>
+<div class="container px-2 lg:px-0 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md" >
 
-    <div class="flex gap-4">
-        <div class="flex flex-col gap-4 w-1/2">
+    <div class="flex">
+        <app-back-link></app-back-link>
+    </div>
+    <div *ngIf="isLoading" class="flex flex-col gap-3">
+        <div class="flex flex-col gap-4 w-full">
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-28"></div>
             <div class="skeleton h-32 w-full"></div>
             <div class="skeleton h-4 w-28"></div>
             <div class="skeleton h-4 w-full"></div>
             <div class="skeleton h-4 w-full"></div>
         </div>
-    
-        <div class="flex flex-col gap-4 w-1/2">
-            <div class="skeleton h-32 w-full"></div>
-            <div class="skeleton h-4 w-28"></div>
-            <div class="skeleton h-4 w-full"></div>
-            <div class="skeleton h-4 w-full"></div>
-        </div>
-    </div>
-</div>
-<div class="flex">
-    <app-back-link></app-back-link>
-</div>
-<div class="flex gap-6">
-    <div class="w-3/4">
-        <div class="blog-head rounded-xl bg-gray-500 bg-opacity-10 p-6 mb-24">
-            <h1 class="text-3xl mb-1">{{blog.title}}</h1>
-            <div class="badge badge-neutral mb-4">{{blog.author_name}} {{blog.author_surname}}</div>
-            <img [src]="blog.feature_image" alt="" class="w-full h-96 object-cover rounded-3xl -mb-24">
-        </div>
-        <div class="flex justify-center gap-5 mb-5">
-            <div class="badge">{{blog.category}}</div> <div class="badge">{{blog.blog_date | date:'dd, MMM YYYY'}}</div>  
-        </div>
-        <div [innerHTML]="blog.content" class="mb-4"></div>
-    </div>
-    <div class="w-1/4">
-        <div class="author flex place-items-center gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 mb-8">
-            <img src="{{blog.author_image}}" alt="" class="w-20 h-20 object-cover rounded-full">
-            <div class="author-name">
-                <p class="mb-2 text-xl">{{blog.author_name}} {{blog.author_surname}}</p>
-                <a href="#" class="btn btn-xs">View Profile</a>
+
+        <div class="flex gap-4">
+            <div class="flex flex-col gap-4 w-1/2">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+
+            <div class="flex flex-col gap-4 w-1/2">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
             </div>
         </div>
-
-        <div class="flex flex-col gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 mb-8">
-            <h2>Blog Tags</h2>
-            <div class="tags flex gap-2 flex-wrap">
-                <div class="tag capitalize badge" *ngFor="let tag of tags">{{tag}}</div>
-            </div>
-        </div>
-
-
-
-
     </div>
+
+    <div *ngIf="!isLoading" class="flex flex-col-reverse lg:flex-row gap-2 lg:gap-6">
+        <div class="w-full lg:w-3/4">
+            <div class="blog-head rounded-xl bg-gray-500 bg-opacity-10 p-6 mb-24">
+                <h1 class="text-3xl mb-1">{{blog.title}}</h1>
+                <div class="badge badge-neutral mb-4">{{blog.author_name}} {{blog.author_surname}}</div>
+                <img [src]="blog.feature_image" alt="" class="w-full h-96 object-cover rounded-3xl -mb-24">
+            </div>
+            <div class="flex justify-center gap-5 mb-5">
+                <div class="badge">{{blog.category}}</div> <div class="badge">{{blog.blog_date | date:'dd, MMM YYYY'}}</div>
+            </div>
+            <div [innerHTML]="blog.content" class="mb-4"></div>
+        </div>
+        <div class="w-full lg:w-1/4">
+            <div class="author flex place-items-center gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 mb-2 lg:mb-8">
+                <img src="{{blog.author_image}}" alt="" class="w-20 h-20 object-cover rounded-full">
+                <div class="author-name">
+                    <p class="mb-2 text-xl">{{blog.author_name}} {{blog.author_surname}}</p>
+                    <a href="#" class="btn btn-xs">View Profile</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 ">
+                <h2>Blog Tags</h2>
+                <div class="tags flex gap-2 flex-wrap">
+                    <div class="tag capitalize badge" *ngFor="let tag of tags">{{tag}}</div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
 </div>

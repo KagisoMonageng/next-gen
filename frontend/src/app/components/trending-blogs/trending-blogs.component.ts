@@ -1,40 +1,60 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Blog } from 'src/app/interfaces/blog';
 import { BlogService } from 'src/app/services/blog.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { gsap } from "gsap";
+import { ExpoScaleEase } from "gsap/EasePack";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { TextPlugin } from "gsap/TextPlugin";
 
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin, ExpoScaleEase);
 
 @Component({
   selector: 'app-trending-blogs',
   templateUrl: './trending-blogs.component.html',
   styleUrls: ['./trending-blogs.component.scss']
 })
-export class TrendingBlogsComponent implements OnInit,OnDestroy {
+export class TrendingBlogsComponent implements OnInit, OnDestroy,AfterViewChecked {
   populars: Blog[] = []
   isLoading = true;
   intervalId: any = 1;
   currFeature = 0;
 
-  constructor(private blogService: BlogService, private sanitizer: DomSanitizer,private router: Router) { }
-  
+  constructor(private blogService: BlogService, private sanitizer: DomSanitizer, private router: Router, private cdr: ChangeDetectorRef) { }
+
+
   ngOnInit(): void {
+
     this.blogService.viewPopular().subscribe((results: Blog[]) => {
       this.populars = results;
       console.log(results)
 
       this.populars.forEach(element => {
         element.content = this.stripHtmlTags(element.content)
-        element.feature_image = element.feature_image.replace('image/upload/','image/upload/c_limit,w_700/')
+        element.feature_image = element.feature_image.replace('image/upload/', 'image/upload/c_limit,w_700/')
       });
       this.isLoading = false;
+
+
     }, (err: any) => {
       console.log(err)
     })
     this.startInterval();
   }
 
-
+  ngAfterViewChecked(): void {
+    // this.cdr.detectChanges()
+      // setTimeout(() => {
+      //   gsap.to('.trend-cards', {
+      //     opacity: 1,
+      //   stagger:.5,
+      //     ease:'power1.in'
+      //   });
+      // }, 500);
+  }
 
   startInterval() {
     this.intervalId = setInterval(() => {
@@ -67,7 +87,7 @@ export class TrendingBlogsComponent implements OnInit,OnDestroy {
     return div.textContent || div.innerText || '';
   }
 
-  viewContent(feature: Blog){
+  viewContent(feature: Blog) {
     console.log(feature)
     this.router.navigate([`view-content/${feature.id}`]);
   }

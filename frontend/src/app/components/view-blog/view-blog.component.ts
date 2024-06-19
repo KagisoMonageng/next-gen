@@ -30,13 +30,17 @@ export class ViewBlogComponent implements OnInit {
     this.blogService.viewBlog(id).subscribe((blog: Blog) => {
       this.blog = blog;
       this.tags = blog.tags.split('#');
-      
+
       // this.blog.feature_image = this.blog.feature_image.replace('image/upload/','image/upload/c_limit,w_700/')
 
       this.isLoading = false;
     }, (err: HttpErrorResponse) => {
       console.log(err)
-      this.toast.error(err.error.message)
+      if (err.error.message) {
+        this.toast.error(err.error.message)
+      }else {
+        this.toast.error("Unexpected error")
+      }
     })
   }
 }
