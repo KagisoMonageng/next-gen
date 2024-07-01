@@ -1,6 +1,8 @@
 // Imports here
 const db = require('../config/db-config');
 
+
+
 exports.viewBlogs = async (req, res) => {
 
     const page = parseInt(req.query.page) || 1;
@@ -99,13 +101,18 @@ exports.addBlog = async (req, res) => {
             console.log(err)
             res.status(400).json({ message: "Failed to add blog entry" });
         } else {
+            const io = req.app.get('socketio');
+            if (io) {
+                // console.log('Emitting newBlog event');
+                io.emit('newBlog', { title, content, author_id, feature_image, blog_date, category, tags, published });
+            } 
             res.status(201).json({ message: "Blog entry added successfully" });
+
         }
 
     })
 
 
-    // Add function in here
 }
 
 exports.updateBlog = async (req, res) => {

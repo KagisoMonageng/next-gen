@@ -5,8 +5,10 @@ const socketIo = require('socket.io');
 require("dotenv").config();
 const app = express();
 
+
 var corsOptions = {
     origin: "*",
+    methods: ['GET', 'POST']
 };
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -19,32 +21,13 @@ app.use(function (req, res, next) {
 
 // Create an HTTP server using the Express app
 const httpServer = http.createServer(app);
+const io = socketIo(httpServer,{
+    cors: corsOptions
+});
 
-// Initialize Socket.IO on the HTTP server
-// const io = socketIo(httpServer, {
-//     cors: {
-//         origin: '*',
-//         methods: ['GET', 'POST'],
-//     },
-// });
 
-// // Listen for client connections
-// io.on('connection', (socket) => {
-//     console.log('A user connected');
-
-//     // Handle custom events from the client
-//     socket.on('message', (data) => {
-//         console.log('Message received:', data);
-//         // Broadcast the message to all connected clients
-//         io.emit('message', data);
-//     });
-
-//     // Handle disconnection
-//     socket.on('disconnect', () => {
-//         console.log('A user disconnected');
-//     });
-// });
-
+// Make io accessible globally
+app.set('socketio', io);
 
 //   Default route displays that
 app.get('/', (req, res) => {

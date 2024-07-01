@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Blog } from 'src/app/interfaces/blog';
 import { BlogService } from 'src/app/services/blog.service';
+import { SocketIoService } from 'src/app/services/socket-io.service';
 
 @Component({
   selector: 'app-new-blogs',
@@ -13,15 +14,31 @@ import { BlogService } from 'src/app/services/blog.service';
 export class NewBlogsComponent implements OnInit {
   newBlogs: Blog[] = [];
   isLoading = true
-  constructor(private blogService: BlogService, private toast: HotToastService, private router: Router) {
+  constructor(private blogService: BlogService, private toast: HotToastService, private router: Router, private socketService: SocketIoService) {
 
   }
   ngOnInit(): void {
+    this.loadBlogs();
+    this.watchNew();
+  }
+
+  stripHtmlTags(html: string): string {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
+
+  viewContent(feature: Blog) {
+    console.log(feature)
+    this.router.navigate([`view-content/${feature.id}`]);
+  }
+
+  loadBlogs() {
     this.blogService.viewLatest().subscribe((latests: Blog[]) => {
       this.newBlogs = latests;
       this.newBlogs.forEach(element => {
         element.content = this.stripHtmlTags(element.content)
-        element.feature_image = element.feature_image.replace('image/upload/','image/upload/c_limit,w_700/')
+        element.feature_image = element.feature_image.replace('image/upload/', 'image/upload/c_limit,w_700/')
       });
       this.isLoading = false;
     }, (err: HttpErrorResponse) => {
@@ -34,15 +51,12 @@ export class NewBlogsComponent implements OnInit {
     })
   }
 
-  stripHtmlTags(html: string): string {
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    return div.textContent || div.innerText || '';
-  }
-
-  viewContent(feature: Blog){
-    console.log(feature)
-    this.router.navigate([`view-content/${feature.id}`]);
+  watchNew() {
+    this.socketService.onNewBlog((blog) => {
+      this.loadBlogs();
+      console.log('SOCKET IO ')
+      this.toast.success("New blog loaded")
+    });
   }
 
 
