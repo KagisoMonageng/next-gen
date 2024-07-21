@@ -25,6 +25,8 @@ import { SearchBlogComponent } from './components/search-blog/search-blog.compon
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LoggedInProfileComponent } from './components/logged-in-profile/logged-in-profile.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { DefNavComponent } from './components/def-nav/def-nav.component';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -40,7 +42,9 @@ import { LoggedInProfileComponent } from './components/logged-in-profile/logged-
     ViewAllBlogsComponent,
     SearchBlogComponent,
     NavigationComponent,
-    LoggedInProfileComponent
+    LoggedInProfileComponent,
+    LandingComponent,
+    DefNavComponent
   ],
   imports: [
     BrowserModule,

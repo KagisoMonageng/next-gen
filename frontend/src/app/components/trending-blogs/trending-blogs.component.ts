@@ -38,7 +38,6 @@ export class TrendingBlogsComponent implements OnInit, OnDestroy,AfterViewChecke
       });
       this.isLoading = false;
 
-
     }, (err: any) => {
       console.log(err)
     })
@@ -46,14 +45,7 @@ export class TrendingBlogsComponent implements OnInit, OnDestroy,AfterViewChecke
   }
 
   ngAfterViewChecked(): void {
-    // this.cdr.detectChanges()
-      // setTimeout(() => {
-      //   gsap.to('.trend-cards', {
-      //     opacity: 1,
-      //   stagger:.5,
-      //     ease:'power1.in'
-      //   });
-      // }, 500);
+
   }
 
   startInterval() {

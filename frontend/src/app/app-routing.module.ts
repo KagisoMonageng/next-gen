@@ -5,9 +5,13 @@ import { TrendingBlogsComponent } from './components/trending-blogs/trending-blo
 import { ViewBlogComponent } from './components/view-blog/view-blog.component';
 import { HomeDashComponent } from './components/home-dash/home-dash.component';
 import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blogs.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 const routes: Routes = [
   // Paths go in here
+  {
+    path: '',component: LandingComponent,
+  },
   {
     path: 'add',component: AddBlogComponent,
   },
