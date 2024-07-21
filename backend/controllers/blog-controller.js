@@ -59,6 +59,34 @@ exports.viewLatestBlogs = async (req, res) => {
     })
 }
 
+exports.viewUserPublishedBlogs = async (req, res) => {
+    const userId = req.params.id;
+    const sql = "SELECT b.id, b.title, b.content, b.author_id, b.feature_image, b.blog_date, b.category, b.tags, b.likes, u.name as author_name, u.surname as author_surname, u.profile_image as author_image FROM blog b INNER JOIN users u ON b.author_id = u.id WHERE b.published = true AND b.author_id = $1 ORDER BY b.blog_date DESC";
+    db.query(sql,[userId], (err, results) => {
+        if (err) {
+            console.log(err)
+            res.status(400).json({ message: "Failed to load data" });
+        } else {
+            res.status(200).json(results.rows);
+        }
+    })
+}
+
+
+exports.viewUserAllBlogs = async (req, res) => {
+    console.log("first")
+    const userId = req.params.id;
+    const sql = "SELECT b.id, b.title, b.content, b.author_id, b.feature_image, b.blog_date, b.category, b.tags, b.likes, u.name as author_name, u.surname as author_surname, u.profile_image as author_image FROM blog b INNER JOIN users u ON b.author_id = u.id WHERE b.author_id = $1 ORDER BY b.blog_date DESC";
+    db.query(sql,[userId], (err, results) => {
+        if (err) {
+            console.log(err)
+            res.status(400).json({ message: "Failed to load data" });
+        } else {
+            res.status(200).json(results.rows);
+        }
+    })
+}
+
 exports.viewPopular = async (req, res) => {
     const sql = "SELECT b.id, b.title, b.content, b.author_id, b.feature_image, b.blog_date, b.category, b.tags, b.likes, u.name as author_name, u.surname as author_surname, u.profile_image as author_image FROM blog b INNER JOIN users u ON b.author_id = u.id WHERE b.published = true ORDER BY b.likes DESC LIMIT 3";
     db.query(sql, (err, results) => {
@@ -111,7 +139,6 @@ exports.addBlog = async (req, res) => {
         }
 
     })
-
 
 }
 

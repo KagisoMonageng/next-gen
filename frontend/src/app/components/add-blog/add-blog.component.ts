@@ -64,7 +64,7 @@ export class AddBlogComponent implements OnInit {
         content: form.value.content,
         tags: selectTags,
         published: true,
-        author_id: 1,
+        author_id: 2,
         feature_image: this.feature_image
       }
       this.blogService.addBlog(data).
@@ -84,7 +84,7 @@ export class AddBlogComponent implements OnInit {
       }, (err: HttpErrorResponse) => {
         console.log(err)
       })
-      
+
 
     }
 
@@ -134,7 +134,7 @@ export class AddBlogComponent implements OnInit {
       }, (err: HttpErrorResponse) => {
         console.log(err)
       })
-      
+
 
     }
   }

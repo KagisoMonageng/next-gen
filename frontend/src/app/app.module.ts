@@ -23,6 +23,10 @@ import { NewBlogsComponent } from './components/new-blogs/new-blogs.component';
 import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blogs.component';
 import { SearchBlogComponent } from './components/search-blog/search-blog.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LoggedInProfileComponent } from './components/logged-in-profile/logged-in-profile.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { DefNavComponent } from './components/def-nav/def-nav.component';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -36,7 +40,11 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     HomeDashComponent,
     NewBlogsComponent,
     ViewAllBlogsComponent,
-    SearchBlogComponent
+    SearchBlogComponent,
+    NavigationComponent,
+    LoggedInProfileComponent,
+    LandingComponent,
+    DefNavComponent
   ],
   imports: [
     BrowserModule,
