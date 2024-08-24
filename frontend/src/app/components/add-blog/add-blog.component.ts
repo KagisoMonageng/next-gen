@@ -4,6 +4,7 @@ import { BlogService } from 'src/app/services/blog.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { EditorModule } from 'primeng/editor';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { JwtServiceService } from 'src/app/services/jwt-service.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -21,6 +22,8 @@ export class AddBlogComponent implements OnInit {
     { name: '#beauty', value: '#beauty' }
   ]
 
+  userID : number = 0
+
   addForm = new FormGroup({
     title: new FormControl('',[Validators.required]),
     content: new FormControl('',[Validators.required]),
@@ -35,8 +38,9 @@ export class AddBlogComponent implements OnInit {
   cloudinaryUrl: string = 'http://api.cloudinary.com/v1_1/next-gen-files/image/upload';
 
 
-  constructor(private blogService: BlogService, private toast: HotToastService, private http: HttpClient) { }
+  constructor(private blogService: BlogService, private toast: HotToastService, private http: HttpClient,private jwt: JwtServiceService) { }
   ngOnInit(): void {
+    this.userID = this.jwt.getData(sessionStorage.getItem('key'))?.id;
   }
 
   submitForm(form: FormGroup) {
@@ -64,7 +68,7 @@ export class AddBlogComponent implements OnInit {
         content: form.value.content,
         tags: selectTags,
         published: true,
-        author_id: 2,
+        author_id: this.userID,
         feature_image: this.feature_image
       }
       this.blogService.addBlog(data).

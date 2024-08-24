@@ -1,0 +1,22 @@
+#Using Node as base
+FROM node:14
+
+#Working directory
+WORKDIR /app
+
+
+#Copy package json for modules
+COPY  package*.json ./
+
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your application runs on
+EXPOSE 8080
+
+# Start the application
+CMD ["npm", "start"]

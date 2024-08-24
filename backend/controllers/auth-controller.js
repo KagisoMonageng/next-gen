@@ -1,6 +1,11 @@
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const db = require("../config/db-config");
 const jwt = require("jsonwebtoken");
+const passport = require('passport');
+const { OAuth2Client } = require('google-auth-library');
+const CLIENT_ID = process.env.CLIENT_ID;
+const client = new OAuth2Client(CLIENT_ID);
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
@@ -58,7 +63,6 @@ exports.login = async (req, res) => {
       });
     }
   };
-
 
 //Registration Function
 exports.register = async (req, res) => {
@@ -133,3 +137,42 @@ exports.register = async (req, res) => {
     });
   }
 };
+
+exports.googleAuth = async (req, res) => {
+  const { token } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const userid = payload['sub'];
+    const email = payload['email'];
+    const name = payload['name'];
+    const profile_image = payload['picture'];
+    // Process the user's information (e.g., create a session or JWT)
+    const tokenJwt = jwt.sign(
+      {
+        email: email,
+        id: userid,
+        name: name,
+        surname: null,
+        short_bio: null,
+        profile_image: profile_image,
+        profile_banner: null
+      },
+      process.env.SECRET_KEY,{
+          expiresIn:'24h',
+          algorithm:'HS256'
+      }
+    );
+    res.status(200).json({
+      message: "Welcome back! "+ name,
+      token: tokenJwt
+    });  
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    res.status(401).json({ message: 'Token is invalid' });
+  }
+}
+

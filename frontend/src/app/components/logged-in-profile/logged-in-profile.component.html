@@ -3,7 +3,7 @@
     <div class="ring-primary ring-offset-base-100 w-32 rounded-full ring ring-offset-2 relative cursor-pointer"
       onclick="my_modal_2.showModal()">
       <div class="badge absolute bottom-2 left-10">Edit</div>
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+      <img [src]="user?.profile_image" />
     </div>
     <dialog id="my_modal_2" class="modal">
       <div class="modal-box">
@@ -17,9 +17,8 @@
   </div>
 
   <div class="bg-white bg-opacity-50 rounded-xl p-3 mb-3">
-    <h3 class="text-center">Ariana Grande</h3>
-    <p class="text-center w-96">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, ipsum tenetur quis
-      quidem </p>
+    <h3 class="text-center">{{user?.name}} {{user?.surname}}</h3>
+    <p class="text-center w-96">{{user?.short_bio}}</p>
     <div class="flex w-full justify-end">
       <div class="badge cursor-pointer">Edit</div>
     </div>
