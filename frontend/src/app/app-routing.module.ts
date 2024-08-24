@@ -6,15 +6,17 @@ import { ViewBlogComponent } from './components/view-blog/view-blog.component';
 import { HomeDashComponent } from './components/home-dash/home-dash.component';
 import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blogs.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
 
 const routes: Routes = [
   // Paths go in here
   {
     path: '',component: LandingComponent,
   },
-  {
-    path: 'add',component: AddBlogComponent,
-  },
+  // {
+  //   path: 'add',component: AddBlogComponent,
+  // },
   {
     path:'dash',component: HomeDashComponent,
   },
@@ -23,7 +25,15 @@ const routes: Routes = [
   },
   {
     path:'view-content/:id',component: ViewBlogComponent
-  }
+  },
+  {
+    path:'login',component: LoginPageComponent
+  },
+  {
+    path:'register',component: RegisterPageComponent
+  },
+
+
 ];
 
 @NgModule({

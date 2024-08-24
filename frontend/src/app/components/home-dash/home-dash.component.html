@@ -7,3 +7,47 @@
     <app-new-blogs></app-new-blogs>
   </div>
 </div>
+
+
+<!-- Open the modal using ID.showModal() method -->
+
+<div class="flex justify-center">
+  <button dat class="btn lg:btn-circle border-0 w-1/4  bg-black text-white add-post fixed -bottom-2 pt-2 pb-4 lg:p-0 lg:bottom-20  lg:right-16 z-50" onclick="my_modal_5.showModal()">
+    <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 rotate-45"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#fff">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+  </button>
+</div>
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box lg:max-w-4xl pt-14 relative">
+    <app-add-blog></app-add-blog>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-circle btn-ghost absolute top-4 right-7">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#16161633">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</dialog>

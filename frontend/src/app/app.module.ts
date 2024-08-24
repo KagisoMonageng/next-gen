@@ -27,6 +27,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { LoggedInProfileComponent } from './components/logged-in-profile/logged-in-profile.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { DefNavComponent } from './components/def-nav/def-nav.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
 (window as any).Quill = Quill;
 
 @NgModule({
@@ -44,7 +46,9 @@ import { DefNavComponent } from './components/def-nav/def-nav.component';
     NavigationComponent,
     LoggedInProfileComponent,
     LandingComponent,
-    DefNavComponent
+    DefNavComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
