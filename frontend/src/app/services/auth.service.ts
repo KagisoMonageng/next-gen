@@ -31,6 +31,10 @@ export class AuthService {
     return this.http.post(this.baseURL + 'auth/login', data)
   }
 
+  register(data: any) {
+    return this.http.post(this.baseURL + 'auth/register', data)
+  }
+
   //saving data
   saveToken(token: string) {
     sessionStorage.setItem('key', token);

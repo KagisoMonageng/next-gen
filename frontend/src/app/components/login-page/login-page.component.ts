@@ -71,7 +71,7 @@ export class LoginPageComponent implements OnInit {
     this.http.post('http://localhost:8080/auth/google', { token: idToken })
     .pipe(
       this.toast.observe({
-        loading: 'Logging you in...',
+        loading: 'Signing you in...',
         success: (s: any) => s.message,
         error: (e) => e.error.message,
       })
@@ -88,7 +88,7 @@ export class LoginPageComponent implements OnInit {
     if (form.valid) {
       this.auth.login(form.value).pipe(
         this.toast.observe({
-          loading: 'Logging you in...',
+          loading: 'Signing you in...',
           success: (s: any) => s.message,
           error: (e) => e.error.message,
         })
