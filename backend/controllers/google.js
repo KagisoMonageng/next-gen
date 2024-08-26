@@ -9,7 +9,7 @@ const CLIENT_KEY = process.env.CLIENT_KEY;
 passport.use(new GoogleStrategy({
   clientID: CLIENT_ID,
   clientSecret: CLIENT_KEY,
-  callbackURL: 'http://localhost:3000/auth/google/callback'
+  callbackURL: 'http://localhost:8080/auth/google/callback'
 }, (accessToken, refreshToken, profile, done) => {
   // Logic to handle user data
   return done(null, profile);
