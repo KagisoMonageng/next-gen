@@ -12,5 +12,5 @@ export interface Blog {
     author_name:string;
     author_surname:string;
     author_image:string;
-    author_id:string;
+    author_id:number;
 }

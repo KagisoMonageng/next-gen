@@ -8,11 +8,15 @@
 
       <div class="form-group">
         <label for="category">Category</label>
-        <select name="category" formControlName="category" id="" class="select select-bordered">
+        <select name="category" formControlName="category" id="" placeholder="Select a category" class="select select-bordered">
+          <option value="" disabled selected>Select a category</option>
           <option value="Technology">Technology</option>
           <option value="General News">General News</option>
           <option value="Politics">Politics</option>
           <option value="Sports">Sports</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Music">Music</option>
+          <option value="Art">Art</option>
         </select>
       </div>
 
@@ -21,7 +25,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-5 gap-y-5 mb-4">
       <div class="form-group ">
         <label for="feature_image">Featured Image</label>
-        <input (change)="onFileChange($event)" type="file" accept="image/x-png,image/jpeg" class="file-input file-input-bordered file-input-ghost">
+        <input formControlName="fileUpload" (change)="onFileChange($event)" type="file" accept="image/x-png,image/jpeg" class="file-input file-input-bordered file-input-ghost">
       </div>
 
       <div class="form-group">
@@ -32,7 +36,7 @@
       </div>
     </div>
     <div class="grid grid-cols-1">
-      <p-editor formControlName="content" [style]="{ height: '320px' }">
+      <p-editor formControlName="content" [style]="{ height: '200px' }">
         <ng-template pTemplate="header">
           <span class="ql-formats">
             <button type="button" class="ql-bold" aria-label="Bold"></button>

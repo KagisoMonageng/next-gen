@@ -23,7 +23,7 @@ app.use(express.json());
 // });
 
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: process.env.CLIENT || '*', // Use environment variable or default to '*'
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Enable cookies if needed
   }));
@@ -51,6 +51,7 @@ httpServer.listen(process.env.PORT, () => {
 // Endpoint routes
 const auth_route = require("./end-points/auth");
 const blog_route = require("./end-points/blog");
+const comment_route = require("./end-points/comment");
 
 app.use(session({
     secret: process.env.SECRET_KEY, // Replace with a secure key
@@ -64,6 +65,7 @@ app.use(passport.session());
 
 app.use("/auth", auth_route);
 app.use("/blog", blog_route)
+app.use("/comment", comment_route)
 
 
 

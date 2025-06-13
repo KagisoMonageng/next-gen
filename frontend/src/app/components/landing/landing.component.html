@@ -25,16 +25,16 @@
           revolution. Imagine a platform that seamlessly blends cutting-edge technology with unparalleled user
           experience, empowering you to share your thoughts, ideas, and passions like never before.</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a href="#"
+          <a href="#" routerLink="register"
             class="rounded-lg bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Get
             started</a>
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span
+          <a href="#about" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span
               aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
 <a id="about"></a>
-    <div class="container mt-20" >
+    <div class="container relative mt-20" >
       <h2 class="mb-4" >About</h2>
       <p class="abouts">
         In this dynamic landscape, every post is an opportunity to connect, inspire, and engage. Our innovative tools
@@ -46,10 +46,9 @@
         just another blogging platform, this is the pinnacle of digital expression.</p>
       <div class="badge block h-fit lg:inline-flex p-3 mx-auto mb-4">
         Are you ready to <span class="text-secondary font-semibold">&nbsp;unleash&nbsp;</span> your
-        <span class="text-secondary font-semibold">&nbsp;creativity&nbsp;</span> and make your mark on the world?&nbsp;<a class="font-semibold text-secondary"><span
+        <span class="text-secondary font-semibold">&nbsp;creativity&nbsp;</span> and make your mark on the world?&nbsp;<a class="font-semibold text-secondary" routerLink="register"><span
           class="absolute inset-0" aria-hidden="true"></span>Start now <span aria-hidden="true">&rarr;</span></a>
       </div>
-
 
       <a id="team"></a>
 
@@ -61,21 +60,21 @@
         </div>
         <div class="w-full lg:w-3/5 grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-4">
           <div class="memberTeam flex gap-2">
-            <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt="">
+            <!-- <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt=""> -->
             <div class="details">
               <p class="name mb-0 text-lg font-semibold">Kagiso Monageng</p>
               <p class="role text-accent mb-0 badge text-xs">FullStack Developer</p>
             </div>
           </div>
           <div class="memberTeam flex gap-2">
-            <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt="">
+            <!-- <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt=""> -->
             <div class="details">
               <p class="name mb-0 text-lg font-semibold">Willfred Mbombi</p>
               <p class="role text-accent mb-0 badge text-xs">FullStack Developer</p>
             </div>
           </div>
           <div class="memberTeam flex gap-2">
-            <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt="">
+            <!-- <img src="../../../assets/img-2.jpg" class="w-12 h-12 object-cover rounded-full" alt=""> -->
             <div class="details">
               <p class="name mb-0 text-lg font-semibold">Cardwell Mathebula</p>
               <p class="role text-accent mb-0 badge text-xs">FullStack Developer</p>
@@ -88,7 +87,7 @@
     </div>
     <a id="blog"></a>
 
-    <div class="container mt-20">
+    <div class="container relative mt-20">
       <h2 class="mb-4">Trending Blogs</h2>
       <div class="trendingTopics grid grid-cols-1 lg:grid-cols-3 gap-x-5 gap-y-3">
 
@@ -98,8 +97,8 @@
           <div class="content w-full md:w-3/5">
             <h3 class="mb-4 font-semibold">{{blog.title}}</h3>
             <p class="landItem">{{blog.content}}</p>
-            <a class="flex w-fit mt-4 rounded-lg bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-secondary "
-              routerLink="/login">Read
+            <a class="flex w-fit cursor-pointer mt-4 rounded-lg bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-secondary "
+              routerLink="login">Read
               blog</a>
           </div>
         </div>

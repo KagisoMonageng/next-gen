@@ -28,7 +28,7 @@ body {
 }
 
 .container{
-  @apply px-2 lg:px-0 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md;
+  @apply px-4 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md;
 }
 
 h2 {
@@ -49,6 +49,9 @@ h2 {
 
 }
 
+.btn{
+  font-weight: 400 !important;
+}
 
 h3 {
   font-size: 18px;
