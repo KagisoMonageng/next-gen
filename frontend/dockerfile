@@ -1,23 +1,30 @@
-# Use the official Node.js image as a base
-FROM node:14
+# Stage 1: Build the Angular app
+FROM node:18-alpine AS build
 
-# Set the working directory
-WORKDIR /src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and install dependencies
 COPY package*.json ./
-
-# Install Angular CLI globally
-RUN npm install -g @angular/cli@16
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the Angular project
 COPY . .
 
-# Expose the port that Angular will run on
-EXPOSE 4200
+# Build the Angular app in production mode
+RUN npm run build --configuration=production
 
-# Start the application using `ng serve`
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Stage 2: Serve the app with Nginx
+FROM nginx:alpine
+
+# Remove the default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built Angular app from build stage
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
+
+# Copy custom nginx config (optional but recommended)
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -182,3 +182,7 @@ p.latest-content {
   }
 }
 
+::ng-deep hot-toast-container>div{
+  z-index: 999999999999 !important;
+}
+
