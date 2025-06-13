@@ -71,8 +71,8 @@ exports.register = async (req, res) => {
 
   const profile_image = "https://res.cloudinary.com/dkvrb3pye/image/upload/v1675240135/vecteezy_profile-user-icon-isolated-on-white-background-vector-eps10__a4gxpc.jpg";
   const profile_banner = "https://res.cloudinary.com/dkvrb3pye/image/upload/v1675240135/vecteezy_profile-user-icon-isolated-on-white-background-vector-eps10__a4gxpc.jpg";
-  const last_login = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate();
-  console.log(last_login)
+  const last_login = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate();
+  // console.log(last_login)
   const short_bio = 'Hey there, I am new on NextGen'
 
   try {
