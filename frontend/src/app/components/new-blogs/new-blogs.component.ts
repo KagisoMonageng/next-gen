@@ -29,7 +29,7 @@ export class NewBlogsComponent implements OnInit {
   }
 
   viewContent(feature: Blog) {
-    console.log(feature)
+    // console.log(feature)
     this.router.navigate([`view-content/${feature.id}`]);
   }
 
@@ -54,8 +54,6 @@ export class NewBlogsComponent implements OnInit {
   watchNew() {
     this.socketService.onNewBlog((blog) => {
       this.loadBlogs();
-      console.log('SOCKET IO ')
-      this.toast.success("New blog loaded")
     });
   }
 

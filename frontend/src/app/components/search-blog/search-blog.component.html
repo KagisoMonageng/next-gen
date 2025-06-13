@@ -4,9 +4,9 @@
   <ul [ngClass]='searchTerm.length
   ? "menu justify-start bg-white bg-opacity-60 absolute z-10 top-14 backdrop-blur-xl w-full rounded-box"
   :"hidden"'>
-    <li *ngFor="let blog of searchResults"><a class="flex flex-col place-items-start gap-1" (click)="viewContent(blog)">
-        <p class="search-title font-medium">{{blog.title}}</p>
-        <p class="search-content">{{blog.content}}</p>
+    <li *ngFor="let blog of searchResults.slice(0.4)"><a class="flex flex-col place-items-start gap-1" (click)="viewContent(blog)">
+        <p class="search-title mb-0 font-medium">{{blog.title}}</p>
+        <p class="search-content mb-0 text-xs">{{blog.content}}</p>
       </a></li>
     <li *ngIf="searchResults.length===0"><a class="flex flex-col place-items-start gap-1">
         <p class="search-title font-medium">No results found</p>

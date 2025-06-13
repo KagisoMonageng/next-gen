@@ -1,9 +1,9 @@
 <app-navigation></app-navigation>
-<div class="container mx-auto px-2 lg:px-0 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
+<div class="container mx-auto px-3 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
   <app-trending-blogs></app-trending-blogs>
 </div>
 <div class="bg-gray-500 bg-opacity-10 py-6 my-8 ">
-  <div class="container px-2 lg:px-0 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
+  <div class="container px-3 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
     <app-new-blogs></app-new-blogs>
   </div>
 </div>
@@ -11,7 +11,7 @@
 
 <!-- Open the modal using ID.showModal() method -->
 
-<div class="flex justify-center">
+<div class="flex justify-center" *ngIf="isLoggedIn">
   <button dat class="btn lg:btn-circle border-0 w-1/4  bg-black text-white add-post fixed -bottom-2 pt-2 pb-4 lg:p-0 lg:bottom-20  lg:right-16 z-50" onclick="my_modal_5.showModal()">
     <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,7 @@ export class ViewAllBlogsComponent implements OnInit{
   blogs : Blog[] = [];
   currentPage = 1;
   totalPages = 1;
-  limit = 3;
+  limit = 8;
 
   constructor(private blogService: BlogService, private toast: HotToastService, private router: Router) {
 

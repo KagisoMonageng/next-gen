@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseURL = 'http://localhost:8080/'
-
-  constructor(private http: HttpClient) {
-
+  baseURL = environment.baseUrl;
+  constructor(private http: HttpClient , private jwtHelper: JwtHelperService) {
   }
 
   public signIn() {
@@ -35,8 +35,33 @@ export class AuthService {
     return this.http.post(this.baseURL + 'auth/register', data)
   }
 
+  resetPassword(data: any) {
+    return this.http.post(this.baseURL + 'auth/reset-password', data)
+  }
+
+  verifyResetToken(token: string) {
+    return this.http.get(this.baseURL + 'auth/verify-token/' + token)
+  }
+  updatePassword(data: any) {
+    return this.http.patch(this.baseURL + 'auth/update-password', data)
+  }
+
+  updateProfileImage(id:number,  url: any) {
+    return this.http.patch(this.baseURL + 'auth/update-profile-image/'+id, url)
+  }
+
+  
+
   //saving data
   saveToken(token: string) {
-    sessionStorage.setItem('key', token);
+    localStorage.setItem('key', token);
+  }
+
+  isLoggedIn() : boolean{
+    const token = localStorage.getItem('key');
+    return !this.jwtHelper.isTokenExpired(token)
+  }
+  logout() {
+    localStorage.removeItem('key');
   }
 }

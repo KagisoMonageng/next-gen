@@ -31,16 +31,16 @@ export class RegisterPageComponent implements OnInit {
   user !: User | null
 
   registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.min(6)]),
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    cemail: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required, Validators.min(6)]),
+    name: new FormControl(null, [Validators.required]),
+    surname: new FormControl(null, [Validators.required]),
   });
 
   ngOnInit(): void {
 
     this.initializeGoogleSignIn();
-
     if (this.jwt.isAuthenticated()) {
       this.user = this.jwt.getData(sessionStorage.getItem('key'));
       this.toast.success("You're already logged in");
@@ -87,6 +87,8 @@ export class RegisterPageComponent implements OnInit {
 
 
   onRegisterSubmit(form: FormGroup) {
+    console.log(form)
+    
     if (form.valid) {
       this.auth.register(form.value).pipe(
         this.toast.observe({
@@ -101,8 +103,6 @@ export class RegisterPageComponent implements OnInit {
       }, (err: HttpErrorResponse) => {
 
       })
-
-
     }
   }
 }

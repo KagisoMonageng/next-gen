@@ -29,8 +29,15 @@ import { LandingComponent } from './components/landing/landing.component';
 import { DefNavComponent } from './components/def-nav/def-nav.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 (window as any).Quill = Quill;
 
+
+export function tokenGetter() {
+  return localStorage.getItem('key');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +55,9 @@ import { RegisterPageComponent } from './components/register-page/register-page.
     LandingComponent,
     DefNavComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    ResetPasswordComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +71,14 @@ import { RegisterPageComponent } from './components/register-page/register-page.
     EditorModule,
     DropdownModule,
     MultiSelectModule,
-    FilterPipeModule
+    FilterPipeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: ['your-api-domain.com'], // optional
+        disallowedRoutes: ['example.com/auth/login'], // optional
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { environment } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
 
-  baseUrl = 'http://localhost:8080';
+  baseURL = environment.baseUrl;
   private socket: Socket;
 
   constructor() { 
-    this.socket = io(this.baseUrl)
+    this.socket = io(this.baseURL)
   }
 
    // Listen for new data

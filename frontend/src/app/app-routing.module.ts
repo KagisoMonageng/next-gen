@@ -8,15 +8,14 @@ import { ViewAllBlogsComponent } from './components/view-all-blogs/view-all-blog
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 const routes: Routes = [
   // Paths go in here
   {
     path: '',component: LandingComponent,
   },
-  // {
-  //   path: 'add',component: AddBlogComponent,
-  // },
   {
     path:'dash',component: HomeDashComponent,
   },
@@ -32,6 +31,12 @@ const routes: Routes = [
   {
     path:'register',component: RegisterPageComponent
   },
+  {
+    path:'forgot-password',component: ResetPasswordComponent
+  },
+  {
+    path:'reset-password',component: UpdatePasswordComponent
+  }
 
 
 ];
