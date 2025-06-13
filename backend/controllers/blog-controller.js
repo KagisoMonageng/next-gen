@@ -135,7 +135,7 @@ exports.addBlog = async (req, res) => {
 
     const sql = "INSERT INTO blog (title, content, author_id, feature_image, blog_date, category, tags, likes, published) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
 
-    const blog_date = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate();
+    const blog_date = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate();
 
     db.query(sql, [title, content, author_id, feature_image, blog_date, category, tags, 0, published], (err, results) => {
         if (err) {
