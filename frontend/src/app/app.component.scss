@@ -1,0 +1,16 @@
+.custom-cursor {
+  position: absolute;
+  width: 15px; /* Width of the dot */
+  height: 15px; /* Height of the dot */
+  border-radius: 50%; /* Make it a circle */
+  pointer-events: none; /* Prevent mouse events on the dot */
+  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth movement */
+  z-index: 9999999999999;
+  @apply bg-secondary;
+}
+
+@media screen and (max-width: 991px) {
+  .custom-cursor{
+    display: none;
+  }
+}

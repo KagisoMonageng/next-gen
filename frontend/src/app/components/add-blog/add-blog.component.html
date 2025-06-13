@@ -1,0 +1,90 @@
+<div class="flex justify-center max-w-5xl mx-auto px-2">
+  <form [formGroup]="addForm" (ngSubmit)="submitForm(addForm)" class="addFrom w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-5 mb-4">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" formControlName="title" placeholder="A brand new day" class="input input-bordered w-full" />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select name="category" formControlName="category" id="" placeholder="Select a category" class="select select-bordered">
+          <option value="" disabled selected>Select a category</option>
+          <option value="Technology">Technology</option>
+          <option value="General News">General News</option>
+          <option value="Politics">Politics</option>
+          <option value="Sports">Sports</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Music">Music</option>
+          <option value="Art">Art</option>
+        </select>
+      </div>
+
+
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-5 gap-y-5 mb-4">
+      <div class="form-group ">
+        <label for="feature_image">Featured Image</label>
+        <input formControlName="fileUpload" (change)="onFileChange($event)" type="file" accept="image/x-png,image/jpeg" class="file-input file-input-bordered file-input-ghost">
+      </div>
+
+      <div class="form-group">
+        <label for="category">Tags</label>
+        <p-multiSelect [options]="tags" formControlName="tags" defaultLabel="Add tags" optionLabel="name"
+          display="chip">
+        </p-multiSelect>
+      </div>
+    </div>
+    <div class="grid grid-cols-1">
+      <p-editor formControlName="content" [style]="{ height: '200px' }">
+        <ng-template pTemplate="header">
+          <span class="ql-formats">
+            <button type="button" class="ql-bold" aria-label="Bold"></button>
+            <button type="button" class="ql-italic" aria-label="Italic"></button>
+            <button type="button" class="ql-underline" aria-label="Underline"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-font">
+              <option selected></option>
+              <option value="serif"></option>
+              <option value="monospace"></option>
+            </select>
+            <select class="ql-size">
+              <option value="small"></option>
+              <option selected></option>
+              <option value="large"></option>
+              <option value="huge"></option>
+            </select>
+          </span>
+          <span class="ql-formats">
+            <button type="button" class="ql-link" aria-label="Insert Link"></button>
+            <!-- <button type="button" class="ql-image" aria-label="Insert Image"></button> -->
+            <button type="button" class="ql-code-block" aria-label="Insert Code Block"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+          </span>
+          <span class="ql-formats">
+            <button type="button" class="ql-align" value=""></button>
+            <button type="button" class="ql-align" value="center"></button>
+            <button type="button" class="ql-align" value="right"></button>
+            <button type="button" class="ql-align" value="justify"></button>
+          </span>
+        </ng-template>
+      </p-editor>
+
+
+
+
+    </div>
+
+
+
+    <div class="flex justify-end gap-2 mt-5">
+      <button type="button" (click)="setDraft(addForm)" class="btn btn-ghost" [disabled]="!addForm.valid">Draft</button>
+      <button type="submit" class="btn btn-secondary"[disabled]="!addForm.valid">Publish</button>
+    </div>
+
+  </form>
+</div>

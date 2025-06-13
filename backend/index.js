@@ -4,48 +4,39 @@ const http = require('http');
 const socketIo = require('socket.io');
 require("dotenv").config();
 const app = express();
+const passport = require('passport');
+
+const session = require('express-session');
+
 
 var corsOptions = {
     origin: "*",
+    methods: ['GET', 'POST']
 };
 app.use(express.json());
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+//     next();
+// });
+
+app.use(cors({
+    origin: process.env.CLIENT || '*', // Use environment variable or default to '*'
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Enable cookies if needed
+  }));
 
 // Create an HTTP server using the Express app
 const httpServer = http.createServer(app);
-
-// Initialize Socket.IO on the HTTP server
 const io = socketIo(httpServer, {
-    cors: {
-        origin: '*',
-        methods: ['GET', 'POST'],
-    },
+    cors: corsOptions
 });
 
-// Listen for client connections
-io.on('connection', (socket) => {
-    console.log('A user connected');
 
-    // Handle custom events from the client
-    socket.on('message', (data) => {
-        console.log('Message received:', data);
-
-        // Broadcast the message to all connected clients
-        io.emit('message', data);
-    });
-
-    // Handle disconnection
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
-    });
-});
-
+// Make io accessible globally
+app.set('socketio', io);
 
 //   Default route displays that
 app.get('/', (req, res) => {
@@ -53,16 +44,28 @@ app.get('/', (req, res) => {
 })
 
 // Start the server and listen on the defined port
-httpServer.listen(process.env.PORT || 8080, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+httpServer.listen(process.env.PORT, () => {
+    console.log(`Server running on port 8080`);
 });
 
 // Endpoint routes
 const auth_route = require("./end-points/auth");
 const blog_route = require("./end-points/blog");
+const comment_route = require("./end-points/comment");
+
+app.use(session({
+    secret: process.env.SECRET_KEY, // Replace with a secure key
+    resave: false,            // Forces the session to be saved back to the session store
+    saveUninitialized: true,  // Forces a session that is "uninitialized" to be saved to the store
+    cookie: { secure: false } // Set secure: true if using HTTPS
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/auth", auth_route);
-app.use("/blog",blog_route)
+app.use("/blog", blog_route)
+app.use("/comment", comment_route)
 
 
 

@@ -1,0 +1,217 @@
+<app-navigation></app-navigation>
+<div class="container px-2 lg:px-0 mx-auto xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md">
+
+    <div class="flex">
+        <app-back-link></app-back-link>
+    </div>
+    <div *ngIf="isLoading" class="flex flex-col gap-3">
+        <div class="flex flex-col gap-4 w-full">
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-32 w-full"></div>
+            <div class="skeleton h-4 w-28"></div>
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-full"></div>
+        </div>
+
+        <div class="flex gap-4">
+            <div class="flex flex-col gap-4 w-1/2">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+
+            <div class="flex flex-col gap-4 w-1/2">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="flex flex-col lg:flex-row gap-2 lg:gap-6">
+        <div class="w-full lg:w-3/4">
+            <div class="blog-head rounded-xl bg-gray-500 bg-opacity-10 p-6 mb-24">
+                <h1 class="text-3xl mb-1">{{blog.title}}</h1>
+                <div class="badge badge-neutral mb-4">{{blog.author_name}} {{blog.author_surname}}</div>
+                <img [src]="blog.feature_image" alt="" class="w-full h-96 object-cover rounded-3xl -mb-24">
+            </div>
+            <div class="flex justify-center gap-5 mb-5">
+                <div class="badge">{{blog.category}}</div>
+                <div class="badge">{{blog.blog_date | date:'dd, MMM YYYY'}}</div>
+            </div>
+            <div [innerHTML]="blog.content" class="mb-4"></div>
+
+
+            <h2 class="mb-4" id="comments">Comments</h2>
+            <div class="comments flex flex-col gap-4">
+                <ng-container *ngIf="comments?.length === 0; else commentsList">
+                    <p class="text-center text-gray-500">No comments yet</p>
+                </ng-container>
+            </div>
+            <ng-template #commentsList>
+                <div class="flex flex-col gap-4">
+                    <div class="rounded-xl bg-gray-500 bg-opacity-5 p-4 flex gap-4"
+                        *ngFor="let comment of (showRecentComments ? comments?.slice(0, 3) : comments)">
+                        <img [src]="comment.author_image" alt="" class="w-7 h-7 object-cover rounded-full" />
+                        <div class="comment-content flex flex-col gap-0">
+                            <p class="font-semibold mb-0"> {{ comment.author_name }} {{ comment.author_surname }}</p>
+                            <p class="mb-0">{{ comment.content }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Toggle Button -->
+                    <div class="flex justify-center">
+                        <button (click)="showRecentComments = !showRecentComments" class="btn btn-ghost btn-xs">
+                            {{ showRecentComments ? 'View all comments' : 'Show less' }}
+                        </button>
+                    </div>
+
+                </div>
+            </ng-template>
+
+
+
+
+
+        </div>
+        <div class="w-full lg:w-1/4">
+            <ng-container *ngIf="user.id === blog.author_id">
+                <div class="flex w-full justify-between place-items-center mb-3">
+                    <p class="text-xs mb-0">
+                        <ng-container *ngIf="blog.published; else draft">
+                            Published
+                        </ng-container>
+                        <ng-template #draft>
+                            Draft
+                        </ng-template>
+                    </p>
+                    <a (click)="togglePublished(blog)"
+                        class="btn btn-secondary btn-xs">
+                        <ng-container *ngIf="blog.published; else publish">
+                            Set Draft
+                        </ng-container>
+                        <ng-template #publish>
+                            Publish
+                        </ng-template>
+                    </a>
+                </div>
+
+            </ng-container>
+
+
+            <div class="author flex place-items-center gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 mb-2 lg:mb-8">
+                <img src="{{blog.author_image}}" alt="" class="w-20 h-20 object-cover rounded-full">
+                <div class="author-name">
+                    <p class="mb-2 text-xl">{{blog.author_name}} {{blog.author_surname}}</p>
+                    <a *ngIf="user.id !== blog.author_id" onclick="my_modal_5.showModal()"
+                        (click)="populateAuthorProfile(blog.author_id)" class="btn btn-ghost btn-xs">View profile</a>
+                </div>
+            </div>
+
+
+
+            <div class="flex flex-col gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 ">
+                <h2>Blog Tags</h2>
+                <div class="tags flex gap-2 flex-wrap">
+                    <div class="tag capitalize badge" *ngFor="let tag of tags">{{tag}}</div>
+                </div>
+            </div>
+
+            <div class="flex my-10 flex-col gap-4 rounded-xl bg-gray-500 bg-opacity-10 p-3 ">
+                <ng-container *ngIf="userBlogs$ | async as userBlogs; else skeleton">
+                    <h2>Author Blogs</h2>
+                    <div class="flex flex-col gap-x-4 gap-y-4 mb-3">
+                        <ng-container *ngFor="let blogA of userBlogs.data.slice(0,3)">
+                            <ng-container *ngIf="blogA.id !== blog.id">
+                                <div class="w-full flex gap-2 relative bg-opacity-50  cursor-pointer"
+                                    [routerLink]="['/view-content', blogA.id]">
+                                    <img [src]="blogA.feature_image" class="w-14 h-24 object-cover rounded-xl" alt="">
+                                    <div class="content">
+                                        <p class="font-semibold latest-title text-sm mb-2">{{blogA.title}}</p>
+                                        <p class="latest-content text-xs" [innerHTML]="blogA.content"></p>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                </ng-container>
+                <ng-template #skeleton>
+                    <div class="flex flex-col gap-y-4 mb-3">
+                        <div class="w-full h-24 bg-white bg-opacity-50 rounded-xl p-2"></div>
+                        <div class="w-full h-24 bg-white bg-opacity-50 rounded-xl p-2"></div>
+                        <div class="w-full h-24 bg-white bg-opacity-50 rounded-xl p-2"></div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+            <ng-container *ngIf="user.id === blog.author_id">
+                <button (click)="delete(blog)" class="btn btn-secondary mb-10 justify-between w-full"><span>Delete this
+                        article</span> <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                        width="15" height="15">
+                        <path fill="#5d3f18"
+                            d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z" />
+                        <path fill="#5d3f18" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z" />
+                        <path fill="#5d3f18" d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z" />
+                    </svg></button>
+            </ng-container>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box lg:max-w-4xl pt-14 relative">
+            <ng-container *ngIf="viewProfile$ | async as author">
+                <!-- <div class="profile-banner overflow-hidden mt-5 rounded-xl">
+                    <img class="w-full h-full object-cover" [src]="author.author.author_banner" alt="{{author.author.author_name}}">
+                </div> -->
+
+                <div
+                    class="ring-primary mx-auto overflow-hidden shadow-xl bg-white ring-offset-base-100 w-32 h-32 rounded-full ring ring-offset-2 relative">
+                    <img class="w-full h-full object-cover" [src]="author.author.author_image" alt="{{author.author.author_name}}" />
+                </div>
+
+                <p class="text-center text-lg font-semibold mt-5 mb-3">{{author.author.author_name}}
+                    {{author.author.author_surname}}</p>
+                <p class="text-center text-sm">{{author.author.author_bio}}</p>
+
+                <h2 class="text-base mb-3">{{author.author.author_name}}'s recent posts</h2>
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                    <a routerLink="/view-content/{{blog.id}}"
+                        class="blog-card flex flex-col lg:flex-row gap-3 rounded-xl bg-black bg-opacity-5 shadow-sm p-2"
+                        *ngFor="let blog of author.data.slice(0,4)">
+                        <div class="blog-content flex flex-col flex-1">
+                            <p class="font-semibold latest-title text-lg mb-4 mt-2">{{blog.title}}</p>
+                            <p class="latest-content" [innerHTML]="blog.content"></p>
+                        </div>
+                    </a>
+
+                </div>
+
+
+
+            </ng-container>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn outline-none btn-circle btn-ghost absolute top-4 right-7">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="#16161633">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+</div>
