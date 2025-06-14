@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnInit {
     private http: HttpClient,
     private env: EnvironmentService
   ) {
-    console.log("second",this.env.googleClientID)
+    // console.log("second",this.env.googleClientID)
 
     
     gapi.load('auth2', () => {

@@ -248,6 +248,7 @@ exports.resetPassword = async (req, res) => {
     const sqlUpdate = "UPDATE users SET reset_token = $1, token_exp = $2 WHERE email = $3";
     db.query(sqlUpdate, [token, expires, email], async (err, updateResults) => {
       if (err) {
+        console.log(err)
         return res.status(500).json({ message: "Database error occurred while updating user!" });
       } else {
         await sendEmail(
@@ -321,6 +322,7 @@ exports.verifyResetToken = async (req, res) => {
   const sql = "SELECT * FROM users WHERE reset_token = $1 AND token_exp > $2";
   db.query(sql, [token, Date.now()], (err, results) => {
     if (err) {
+      console.log(err)
       return res.status(500).json({ message: "Database error occurred while verifying token!" });
     }
     if (results.rows.length === 0) {
