@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtServiceService } from 'src/app/services/jwt-service.service';
 import { gapi } from 'gapi-script';
+import { EnvironmentService } from 'src/app/services/environment.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,16 +16,20 @@ import { gapi } from 'gapi-script';
 })
 export class LoginPageComponent implements OnInit {
 
+  baseURL = '';
   constructor(
     private auth: AuthService,
     private router: Router,
     private jwt: JwtServiceService,
     private toast: HotToastService,
-    private http: HttpClient
+    private http: HttpClient,
+    private env: EnvironmentService
   ) {
+
+    
     gapi.load('auth2', () => {
       gapi.auth2.init({
-        client_id: '295049434949-bdb1ue7dpca36ja02rocs3n5hbdg7lo0.apps.googleusercontent.com',
+        client_id: this.env.googleClientID,
       });
     });
   }
@@ -51,7 +56,7 @@ export class LoginPageComponent implements OnInit {
     // Load the Google API client library
     gapi.load('auth2', () => {
       gapi.auth2.init({
-        client_id: '295049434949-bdb1ue7dpca36ja02rocs3n5hbdg7lo0.apps.googleusercontent.com',
+        client_id: this.env.googleClientID,
       }).then(auth2 => {
         const googleSignInButton = document.getElementById('google-signin-button');
         auth2.attachClickHandler(googleSignInButton, {},
@@ -68,7 +73,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   sendTokenToBackend(idToken: string) {
-    this.http.post('http://localhost:8080/auth/google', { token: idToken })
+    this.http.post(this.env.baseUrl+'auth/google', { token: idToken })
     .pipe(
       this.toast.observe({
         loading: 'Signing you in...',
