@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environment';
+import { EnvironmentService } from './environment.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseURL = environment.baseUrl;
-  constructor(private http: HttpClient , private jwtHelper: JwtHelperService) {
+  baseURL = '';
+  constructor(private http: HttpClient , private jwtHelper: JwtHelperService,private env: EnvironmentService) {
+    this.baseURL = this.env.baseUrl;
   }
 
   public signIn() {

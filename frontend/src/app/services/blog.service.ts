@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Blog } from '../interfaces/blog';
-import { environment } from 'src/environment';
+import { EnvironmentService } from './environment.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
- baseURL = environment.baseUrl;
-
-  constructor(private http : HttpClient) { }
+baseURL = '';
+  constructor(private http : HttpClient,private env: EnvironmentService) { 
+    this.baseURL = this.env.baseUrl;
+  }
 
   viewAll(page: number, limit: number): Observable<Blog[]>{
    return this.http.get<Blog[]>(`${this.baseURL}blog/view-all?page=${page}&limit=${limit}`)
