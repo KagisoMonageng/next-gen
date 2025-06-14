@@ -23,6 +23,6 @@ export class JwtServiceService {
   }
 
   isAuthenticated():boolean{
-    return !this.helper.isTokenExpired(sessionStorage.getItem('key'));
+    return !this.helper.isTokenExpired(localStorage.getItem('key'));
   }
 }

@@ -44,12 +44,12 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log("second",this.env.googleClientID)
+    // console.log("second",this.env.googleClientID)
     this.initializeGoogleSignIn();
 
 
     if (this.jwt.isAuthenticated()) {
-      this.user = this.jwt.getData(sessionStorage.getItem('key'));
+      this.user = this.jwt.getData(localStorage.getItem('key'));
       this.toast.success("You're already logged in");
       this.router.navigateByUrl('/dash');
     }

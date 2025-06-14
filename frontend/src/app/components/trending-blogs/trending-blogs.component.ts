@@ -30,8 +30,6 @@ export class TrendingBlogsComponent implements OnInit, OnDestroy,AfterViewChecke
 
     this.blogService.viewPopular().subscribe((results: Blog[]) => {
       this.populars = results;
-      console.log(results)
-
       this.populars.forEach(element => {
         element.content = this.stripHtmlTags(element.content)
         element.feature_image = element.feature_image.replace('image/upload/', 'image/upload/c_limit,w_700/')
