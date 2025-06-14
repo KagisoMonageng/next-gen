@@ -22,16 +22,34 @@ app.use(express.json());
 //     next();
 // });
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+
 app.use(cors({
-    origin: process.env.CLIENT || '*', // Use environment variable or default to '*'
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Enable cookies if needed
-  }));
+    credentials: true
+}));
 
 // Create an HTTP server using the Express app
 const httpServer = http.createServer(app);
 const io = socketIo(httpServer, {
-    cors: corsOptions
+    cors: {
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Socket.IO CORS error: Origin not allowed'));
+            }
+        },
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
 });
 
 
