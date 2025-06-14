@@ -36,6 +36,9 @@ export class ViewBlogComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     if (this.isLoggedIn) {
       this.user = this.jwt.getData(localStorage.getItem('key'))
+    }else{
+      this.router.navigateByUrl('/login');
+      this.toast.error("You need to login to view this blog")
     }
     this.route.paramMap.subscribe(params => {
       this.featureId = Number(params.get('id'));

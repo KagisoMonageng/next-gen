@@ -64,7 +64,7 @@ export class ViewAllBlogsComponent implements OnInit{
   }
 
   viewContent(feature: Blog){
-    console.log(feature)
+    // console.log(feature)
     this.router.navigate([`view-content/${feature.id}`]);
   }
 }
