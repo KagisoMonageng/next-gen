@@ -38,6 +38,9 @@ export class LoggedInProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     this.user = this.jwt.getData(localStorage.getItem('key'))
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/login');
+    }
     this.userBlogs$ = this.blogService.viewUserProfile(this.user?.id || 0);
   }
 
@@ -45,7 +48,6 @@ export class LoggedInProfileComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file);
     formData.append('upload_preset', 'zvryv0vg');
-    console.log(this.env.cloudinaryUrl)
     this.http.post(this.env.cloudinaryUrl, formData).pipe(
       this.toast.observe({
         loading: 'Saving...',
@@ -75,7 +77,7 @@ export class LoggedInProfileComponent implements OnInit {
   }
 
   logout(): void {
-    sessionStorage.removeItem('key');
+    localStorage.removeItem('key');
     this.router.navigateByUrl('/login');
   }
 
