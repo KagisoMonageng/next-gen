@@ -25,6 +25,7 @@ export class LoginPageComponent implements OnInit {
     private http: HttpClient,
     private env: EnvironmentService
   ) {
+    console.log("second",this.env.googleClientID)
 
     
     gapi.load('auth2', () => {
@@ -43,6 +44,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log("second",this.env.googleClientID)
     this.initializeGoogleSignIn();
 
 
