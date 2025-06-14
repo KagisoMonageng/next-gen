@@ -1,4 +1,1 @@
-window.__env = {
-  baseUrl: '',
-  cloudinaryUrl:'',
-};
+window.__env = {};

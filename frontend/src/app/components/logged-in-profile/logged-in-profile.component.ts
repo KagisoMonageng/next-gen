@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BlogService } from 'src/app/services/blog.service';
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { JwtServiceService } from 'src/app/services/jwt-service.service';
-import { environment } from 'src/environment';
+
 
 @Component({
   selector: 'app-logged-in-profile',
@@ -19,18 +20,20 @@ export class LoggedInProfileComponent implements OnInit {
 
   user !: User | null
   userBlogs$: Observable<any> | undefined;
-  cloudinaryUrl: string = environment.cloudinaryUrl;
+  cloudinaryUrl: string = '';
   file!: string
   editing: boolean = true;
   uploadImageForm: FormGroup = new FormGroup({
     file: new FormControl('', [Validators.required]),
   })
 
-  constructor(private jwt: JwtServiceService, private router: Router, private blogService: BlogService, private http: HttpClient, private toast: HotToastService, private authService: AuthService, private cdr: ChangeDetectorRef) {
+  constructor(private jwt: JwtServiceService, private router: Router, private blogService: BlogService, private http: HttpClient, private toast: HotToastService, private authService: AuthService, private cdr: ChangeDetectorRef,private env: EnvironmentService) {
     this.user = this.jwt.getData(localStorage.getItem('key'))
     if (!this.user) {
       this.router.navigateByUrl('/login')
     }
+
+    
 
   }
   ngOnInit(): void {
@@ -42,8 +45,8 @@ export class LoggedInProfileComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file);
     formData.append('upload_preset', 'zvryv0vg');
-
-    this.http.post(this.cloudinaryUrl, formData).pipe(
+    console.log(this.env.cloudinaryUrl)
+    this.http.post(this.env.cloudinaryUrl, formData).pipe(
       this.toast.observe({
         loading: 'Saving...',
         success: 'Profile image Saved',
